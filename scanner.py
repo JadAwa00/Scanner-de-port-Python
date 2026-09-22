@@ -4,6 +4,7 @@
 
 import socket
 import threading
+import time
 from queue import Queue
 
 # Demande à l'utilisateur
@@ -49,6 +50,9 @@ fill_queue(port_list)
 # Stockage des threads dans une liste
 thread_list = []
 
+# Début du chronomètre
+debut = time.time()
+
 for t in range(500):
     # Définition de la fonction exécutée par le thread
     thread = threading.Thread(target=executor)
@@ -63,4 +67,8 @@ for thread in thread_list:
     # Attend que le thread soit terminé
     thread.join()
 
+# Fin du chronomètre
+fin = time.time()
+
 print("Les ports ouverts sont : ", open_ports)
+print("Temps d'exécution :", round(fin - debut, 2), "secondes")
